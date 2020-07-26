@@ -12,8 +12,8 @@ public class Main {
     private static boolean exit = false;
 
     public static void main(String[] args) throws IOException {
-        label:
-        do {
+
+        while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
             System.out.println("0. Exit");
@@ -27,29 +27,29 @@ public class Main {
                     System.out.println("\nEnter your card number:");
                     long cardNumber = Long.parseLong(reader.readLine());
                     System.out.println("Enter your PIN:");
-                    int numberPIN = Integer.parseInt(reader.readLine());
+                    String numberPIN = reader.readLine();
                     Account account = logIn(cardNumber, numberPIN);
                     if (account != null) {
                         System.out.println("\nYou have successfully logged in!\n");
                         inAccount(account);
                         if (exit) {
-                            break label;
+                            System.out.println("\nBye!");
+                            return;
                         }
                     } else {
                         System.out.println("\nWrong card number or PIN!");
                     }
                     break;
                 case "0":
-                    break label;
+                    System.out.println("\nBye!");
+                    return;
                 default:
                     break;
             }
-        } while (true);
-        System.out.println("\nBye!");
+        }
     }
 
     private static void inAccount(Account account) throws IOException {
-        label:
         while (true) {
             System.out.println("1. Balance");
             System.out.println("2. Log out");
@@ -57,15 +57,14 @@ public class Main {
             String command = reader.readLine();
             switch (command) {
                 case "1":
-                    System.out.println();
-                    System.out.printf("Balance: %d%n", account.getBalance());
+                    System.out.printf("%nBalance: %d%n%n", account.getBalance());
                     break;
                 case "2":
-                    System.out.println("You have successfully logged out!");
-                    break label;
+                    System.out.println("\nYou have successfully logged out!\n");
+                    return;
                 case "0":
                     exit = true;
-                    break label;
+                    return;
                 default:
                     break;
             }
@@ -74,11 +73,11 @@ public class Main {
 
     private static void createAccount() {
         String cardNumber = "400000" + generateRandomNumber(10);
-        Account account = new Account(cardNumber, Integer.parseInt(generateRandomNumber(4)));
+        Account account = new Account(cardNumber, generateRandomNumber(4));
         accounts.put(Long.valueOf(cardNumber), account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
-        System.out.printf("Your card PIN: %n%d%n", account.getCardPIN());
+        System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
     }
 
     private static String generateRandomNumber(int length) {
@@ -93,13 +92,9 @@ public class Main {
         }
     }
 
-/*    private static int generateRandomPIN() {
-        return (int) (Math.random() * 9999);
-    }*/
-
-    private static Account logIn(long cardNumber, int cardPIN) {
+    private static Account logIn(long cardNumber, String cardPIN) {
         Account account = accounts.get(cardNumber);
-        if (account != null && account.getCardPIN() == cardPIN) {
+        if (account != null && account.getCardPIN().equals(cardPIN)) {
             return account;
         }
         return null;

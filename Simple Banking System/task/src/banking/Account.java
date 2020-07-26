@@ -2,10 +2,10 @@ package banking;
 
 public class Account {
     String cardNumber;
-    int cardPIN;
+    String cardPIN;
     int balance;
 
-    public Account(String cardNumber, int cardPIN) {
+    public Account(String cardNumber, String cardPIN) {
         this.cardNumber = cardNumber;
         this.cardPIN = cardPIN;
         balance = 0;
@@ -19,11 +19,11 @@ public class Account {
         this.cardNumber = cardNumber;
     }
 
-    public int getCardPIN() {
+    public String getCardPIN() {
         return cardPIN;
     }
 
-    public void setCardPIN(int cardPIN) {
+    public void setCardPIN(String cardPIN) {
         this.cardPIN = cardPIN;
     }
 
