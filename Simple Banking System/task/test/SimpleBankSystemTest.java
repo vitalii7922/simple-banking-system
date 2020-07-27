@@ -244,6 +244,44 @@ public class SimpleBankSystemTest extends StageTest {
 
                     isCompleted = true;
                     return "0";
+                }),
+            //Check Luhn algorithm
+            new TestCase()
+                .setInput("1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n")
+                .addInput(output -> {
+                    String out = output.toString().trim().toLowerCase();
+
+                    Pattern cardNumberPattern = Pattern.compile("400000\\d{10}");
+                    Matcher cardNumberMatcher = cardNumberPattern.matcher(out);
+
+                    boolean isSomeCardFound = false;
+                    int foundCards = 0;
+
+                    while (cardNumberMatcher.find()) {
+
+                        foundCards++;
+
+                        if (!isSomeCardFound) {
+                            isSomeCardFound = true;
+                        }
+
+                        String cardNumber = cardNumberMatcher.group();
+
+                        if (!checkLuhnAlgorithm(cardNumber)) {
+                            return new CheckResult(false, String.format("The card number %s doesn’t pass the Luhn algorithm.", cardNumber));
+                        }
+                    }
+
+                    if (!isSomeCardFound) {
+                        return new CheckResult(false, "You should output card number and PIN like in example");
+                    }
+
+                    if (foundCards != 20) {
+                        return new CheckResult(false, "Tried to generate 20 cards, but found " + foundCards);
+                    }
+
+                    isCompleted = true;
+                    return "0";
                 })
         );
     }
@@ -255,5 +293,19 @@ public class SimpleBankSystemTest extends StageTest {
         else
             isCompleted = false;
         return CheckResult.correct();
+    }
+
+    private boolean checkLuhnAlgorithm(String cardNumber) {
+        int result = 0;
+        for (int i = 0; i < cardNumber.length(); i++) {
+            int digit = Character.getNumericValue(cardNumber.charAt(i));
+            if (i % 2 == 0) {
+                int doubleDigit = digit * 2 > 9 ? digit * 2 - 9 : digit * 2;
+                result += doubleDigit;
+                continue;
+            }
+            result += digit;
+        }
+        return result % 10 == 0;
     }
 }
