@@ -1,4 +1,5 @@
 package banking;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,10 +29,8 @@ public class Main {
                     long cardNumber = Long.parseLong(reader.readLine());
                     System.out.println("Enter your PIN:");
                     String numberPIN = reader.readLine();
-                    List<Account> accountList = logIn(cardNumber, numberPIN);
-                    Account account = null;
-                    if (!accountList.isEmpty()) {
-                        account = accountList.get(0);
+                    Account account = logIn(cardNumber, numberPIN);
+                    if (account != null) {
                         System.out.println("\nYou have successfully logged in!\n");
                         inAccount(account);
                         if (exit) {
@@ -77,7 +76,7 @@ public class Main {
         String identificationNumber = generateRandomNumber(9);
         String cardNumber = applyLuhnAlgorithm(identificationNumber);
         Account account = new Account(cardNumber, generateRandomNumber(4));
-        accounts.put(Long.valueOf(identificationNumber), account);
+        () accounts.put(Long.parseLong(cardNumber), account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
@@ -95,21 +94,22 @@ public class Main {
         }
     }
 
-    private static List<Account> logIn(long cardNumber, String cardPIN) {
-        return accounts
-                .values()
-                .stream()
-                .filter(x -> Long.parseLong(x.getCardNumber()) == cardNumber && x.getCardPIN().equals(cardPIN))
-                .collect(Collectors.toList());
-//        Account account = accounts.get(cardNumber);
-//        if (account != null && account.getCardPIN().equals(cardPIN)) {
-//            return account;
-//        }
-//        return null;
+    private static Account logIn(long cardNumber, String cardPIN) {
+//        return accounts
+//                .values()
+//                .stream()
+//                .filter(x -> Long.parseLong(x.getCardNumber()) == cardNumber && x.getCardPIN().equals(cardPIN))
+//                .collect(Collectors.toList());
+        Account account = accounts.get(cardNumber);
+        if (account != null && account.getCardPIN().equals(cardPIN)) {
+            return account;
+        }
+        return null;
     }
 
     private static String applyLuhnAlgorithm(String accountIdentifier) {
-        String cardNumber = "200000" + accountIdentifier;
+        String cardNumber = "400000" + accountIdentifier;
+//        System.out.println(cardNumber);
         char[] numbers = cardNumber.toCharArray();
         List<Integer> algorithmResult = new ArrayList<>();
         for (int i = 0; i < cardNumber.length(); i++) {
@@ -123,14 +123,11 @@ public class Main {
                 .stream()
                 .map(x -> x > 9 ? x - 9 : x)
                 .collect(Collectors.toList());
+//        algorithmResult.forEach(System.out::print);
         return addCheckSumNumber(algorithmResult
                         .stream()
                         .mapToInt(Integer::intValue)
-                        .sum(),
-                algorithmResult
-                        .stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.joining()));
+                        .sum(), cardNumber);
     }
 
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
