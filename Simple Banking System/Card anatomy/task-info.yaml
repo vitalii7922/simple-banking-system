@@ -278,9 +278,10 @@ files:
 - name: src/banking/Account.java
   visible: true
   learner_created: true
-- name: src/banking/MenuFinishedException.java
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/515/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/93/stages/515/implement">JetBrains
+    Academy</a>
+  time: Mon, 27 Jul 2020 08:42:54 UTC
 record: -1

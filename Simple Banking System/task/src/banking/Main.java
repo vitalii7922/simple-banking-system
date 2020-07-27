@@ -72,6 +72,7 @@ public class Main {
     }
 
     private static void createAccount() {
+        
         String cardNumber = "400000" + generateRandomNumber(10);
         Account account = new Account(cardNumber, generateRandomNumber(4));
         accounts.put(Long.valueOf(cardNumber), account);

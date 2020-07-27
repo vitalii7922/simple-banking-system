@@ -54,40 +54,6 @@ topics:
     theory_id: 3512
   - title: Increment and decrement
     theory_id: 5008
-  - title: Characters
-    theory_id: 3514
-  - title: String
-    theory_id: 3523
-  - title: Conditional statement
-    theory_id: 3503
-  - title: Ternary operator
-    theory_id: 3506
-  - title: The for-loop
-    theory_id: 3505
-  - title: The while and do-while loops
-    theory_id: 3498
-  - title: Branching statements
-    theory_id: 3507
-  - title: Iterating over arrays
-    theory_id: 3602
-  - title: Multi-dimensional array
-    theory_id: 1933
-  - title: Defining methods
-    theory_id: 3590
-  - title: IntelliJ IDEA
-    theory_id: 3801
-  - title: IDEA Basics
-    theory_id: 5819
-  - title: EduTools
-    theory_id: 5839
-  - title: Write, compile, and run
-    theory_id: 3739
-  - title: Defining classes
-    theory_id: 3618
-  - title: Objects
-    theory_id: 4727
-  - title: Random
-    theory_id: 4910
   1:
   - title: Package
     theory_id: 3621
