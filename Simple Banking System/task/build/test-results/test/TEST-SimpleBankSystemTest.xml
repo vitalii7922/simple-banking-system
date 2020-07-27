@@ -1,31 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-27T15:46:59" hostname="DESKTOP-H0T0QGB" time="0.206">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-07-27T17:15:57" hostname="DESKTOP-H0T0QGB" time="0.227">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.206"/>
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.227">
+    <failure message="java.lang.AssertionError: Wrong answer in test #4&#10;&#10;Your table should have columns described in the stage instructions.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;-fileName &#10;card.s3db &#10;jdbc:sqlite:card.s3db&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 0&#10;&#10;Bye!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #4
+
+Your table should have columns described in the stage instructions.
+
+Please find below the output of your program during this failed test.
+Note that the '&gt;' character indicates the beginning of the input line.
+
+---
+
+Arguments: -fileName card.s3db
+
+-fileName 
+card.s3db 
+jdbc:sqlite:card.s3db
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 0
+
+Bye!
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:97)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:175)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:157)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000005907920228
-Your card PIN: 
-6019
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000004825309994
-Your card PIN: 
-8941
-
+-fileName 
+card.s3db 
+jdbc:sqlite:card.s3db
 1. Create an account
 2. Log into account
 0. Exit
@@ -34,36 +88,9 @@ Your card PIN:
 Bye!
 ?[1;31m
 Start test 2?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000005633558417
-Your card PIN: 
-4622
-
-1. Create an account
-2. Log into account
-0. Exit
-> 2
-
-Enter your card number:
-> 4000005633558417
-Enter your PIN:
-> 4622
-
-You have successfully logged in!
-
-1. Balance
-2. Log out
-0. Exit
-> 2
-
-You have successfully logged out!
-
+-fileName 
+card.s3db 
+jdbc:sqlite:card.s3db
 1. Create an account
 2. Log into account
 0. Exit
@@ -72,29 +99,9 @@ You have successfully logged out!
 Bye!
 ?[1;31m
 Start test 3?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000002535317497
-Your card PIN: 
-0279
-
-1. Create an account
-2. Log into account
-0. Exit
-> 2
-
-Enter your card number:
-> 4000002535317497
-Enter your PIN:
-> 8553
-
-Wrong card number or PIN!
-
+-fileName 
+card.s3db 
+jdbc:sqlite:card.s3db
 1. Create an account
 2. Log into account
 0. Exit
@@ -103,295 +110,9 @@ Wrong card number or PIN!
 Bye!
 ?[1;31m
 Start test 4?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000004730969411
-Your card PIN: 
-1713
-
-1. Create an account
-2. Log into account
-0. Exit
-> 2
-
-Enter your card number:
-> 400000386229665
-Enter your PIN:
-> 1713
-
-Wrong card number or PIN!
-
-1. Create an account
-2. Log into account
-0. Exit
-> 0
-
-Bye!
-?[1;31m
-Start test 5?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000008186481177
-Your card PIN: 
-2777
-
-1. Create an account
-2. Log into account
-0. Exit
-> 2
-
-Enter your card number:
-> 4000008186481177
-Enter your PIN:
-> 2777
-
-You have successfully logged in!
-
-1. Balance
-2. Log out
-0. Exit
-> 1
-
-Balance: 0
-
-1. Balance
-2. Log out
-0. Exit
-> 0
-
-Bye!
-?[1;31m
-Start test 6?[0m
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000009461077540
-Your card PIN: 
-6102
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000007086853204
-Your card PIN: 
-0878
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000000033131766
-Your card PIN: 
-8757
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000002015257577
-Your card PIN: 
-8233
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000005272172140
-Your card PIN: 
-9389
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000009485742087
-Your card PIN: 
-6287
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000002859780809
-Your card PIN: 
-2193
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000006159817351
-Your card PIN: 
-7994
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000005189250211
-Your card PIN: 
-7716
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000000367203264
-Your card PIN: 
-2525
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000006899943244
-Your card PIN: 
-4138
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000002438763680
-Your card PIN: 
-6769
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000003275807044
-Your card PIN: 
-0047
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000004776787438
-Your card PIN: 
-1635
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000001829399518
-Your card PIN: 
-6535
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000000322371396
-Your card PIN: 
-4182
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000007445224782
-Your card PIN: 
-8137
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000002347099598
-Your card PIN: 
-1992
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000003985901798
-Your card PIN: 
-3185
-
-1. Create an account
-2. Log into account
-0. Exit
-> 1
-
-Your card has been created
-Your card number: 
-4000009931804382
-Your card PIN: 
-4099
-
+-fileName 
+card.s3db 
+jdbc:sqlite:card.s3db
 1. Create an account
 2. Log into account
 0. Exit

@@ -1,14 +1,26 @@
 package banking;
 
 public class Account {
-    String cardNumber;
-    String cardPIN;
-    int balance;
+    private long id;
+    private String cardNumber;
+    private String cardPIN;
+    private int balance;
+
+    public Account() {
+    }
 
     public Account(String cardNumber, String cardPIN) {
         this.cardNumber = cardNumber;
         this.cardPIN = cardPIN;
         balance = 0;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCardNumber() {

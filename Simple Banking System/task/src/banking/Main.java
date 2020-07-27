@@ -13,7 +13,9 @@ public class Main {
     private static boolean exit = false;
 
     public static void main(String[] args) throws IOException {
-
+        DBOperations.setUrl(args[1]);
+        DBOperations.createNewTable();
+        DBOperations.selectAll();
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
@@ -76,7 +78,8 @@ public class Main {
         String identificationNumber = generateRandomNumber(9);
         String cardNumber = applyLuhnAlgorithm(identificationNumber);
         Account account = new Account(cardNumber, generateRandomNumber(4));
-        () accounts.put(Long.parseLong(cardNumber), account);
+//        accounts.put(Long.parseLong(cardNumber), account);
+        DBOperations.insert(account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
@@ -125,9 +128,9 @@ public class Main {
                 .collect(Collectors.toList());
 //        algorithmResult.forEach(System.out::print);
         return addCheckSumNumber(algorithmResult
-                        .stream()
-                        .mapToInt(Integer::intValue)
-                        .sum(), cardNumber);
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum(), cardNumber);
     }
 
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
