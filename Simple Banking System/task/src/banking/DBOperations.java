@@ -6,6 +6,8 @@ public class DBOperations {
 
     private static String url;
 
+    private DBOperations() {
+    }
 
     public static void setUrl(String fileName) {
         DBOperations.url = "jdbc:sqlite:" + fileName;
@@ -71,8 +73,6 @@ public class DBOperations {
 
     public static void createNewTable() {
         // SQLite connection string
-
-        System.out.println(url);
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS card (\n"
                 + "	id integer PRIMARY KEY AUTOINCREMENT,\n"

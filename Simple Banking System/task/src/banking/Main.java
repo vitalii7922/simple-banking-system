@@ -12,10 +12,11 @@ public class Main {
     private static final Random random = new Random();
     private static boolean exit = false;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         DBOperations.setUrl(args[1]);
         DBOperations.createNewTable();
-        DBOperations.selectAll();
+//        Thread.sleep(1000);
+//        DBOperations.selectAll();
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
