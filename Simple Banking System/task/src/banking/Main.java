@@ -75,7 +75,7 @@ public class Main {
                     System.out.println("\nTransfer");
                     System.out.println("Enter card number:");
                     String toAccount = reader.readLine();
-                    doTransfer(toAccount, account);
+                    doTransfer(toAccount, DBOperations.selectCardById(account.getId()));
                     break;
                 case "0":
                     exit = true;
@@ -84,10 +84,6 @@ public class Main {
                     break;
             }
         }
-    }
-
-    private static void doTransfer(Account toAccount, Account fromAccount, int money) {
-
     }
 
     private static void doTransfer(String toAccountNumber, Account fromAccount) throws IOException {
@@ -104,11 +100,11 @@ public class Main {
             System.out.println("Enter how much money you want to transfer:");
             int money = Integer.parseInt(reader.readLine());
             if (money > fromAccount.getBalance()) {
-                System.out.println("Not enough money");
+                System.out.println("Not enough money\n");
             } else {
                 DBOperations.decBalance(money, fromAccount);
                 DBOperations.incBalance(money, toAccount);
-                System.out.println("Success");
+                System.out.println("Success\n");
             }
         }
     }

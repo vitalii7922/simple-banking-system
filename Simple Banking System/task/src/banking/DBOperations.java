@@ -1,4 +1,5 @@
 package banking;
+
 import java.sql.*;
 
 public class DBOperations {
@@ -265,7 +266,6 @@ public class DBOperations {
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             // set the corresponding param
             // execute the delete statement
             pstmt.execute();
