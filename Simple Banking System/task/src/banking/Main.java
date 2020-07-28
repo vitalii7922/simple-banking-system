@@ -54,16 +54,29 @@ public class Main {
     private static void inAccount(Account account) throws IOException {
         while (true) {
             System.out.println("1. Balance");
-            System.out.println("2. Log out");
+            System.out.println("2. Add income");
+            System.out.println("3. Do transfer");
+            System.out.println("4. Close account");
+            System.out.println("5. Log out");
             System.out.println("0. Exit");
             String command = reader.readLine();
             switch (command) {
                 case "1":
+                    account = DBOperations.selectCardById(account.getId());
+                    assert account != null;
                     System.out.printf("%nBalance: %d%n%n", account.getBalance());
                     break;
                 case "2":
-                    System.out.println("\nYou have successfully logged out!\n");
-                    return;
+                    System.out.println("\nEnter income:");
+                    addIncome(reader.readLine(), DBOperations.selectCardById(account.getId()));
+                    System.out.println("Income was added\n");
+                    break;
+                case "3":
+                    System.out.println("\nTransfer");
+                    System.out.println("Enter card number:");
+                    String toAccount = reader.readLine();
+                    doTransfer(toAccount, account);
+                    break;
                 case "0":
                     exit = true;
                     return;
@@ -73,14 +86,47 @@ public class Main {
         }
     }
 
-    private static void createAccount() {
+    private static void doTransfer(Account toAccount, Account fromAccount, int money) {
+
+    }
+
+    private static void doTransfer(String toAccountNumber, Account fromAccount) throws IOException {
+        if (!toAccountNumber.equals(applyLuhnAlgorithm(toAccountNumber.substring(0, 15)))) {
+            System.out.println(toAccountNumber);
+            System.out.println(toAccountNumber.substring(0, 16));
+            System.out.println("Probably you made mistake in the card number. Please try again!\n");
+            return;
+        }
+        Account toAccount = DBOperations.selectCardByNumber(toAccountNumber);
+        if (toAccount == null) {
+            System.out.println("Such a card doesn't exist\n");
+        } else {
+            System.out.println("Enter how much money you want to transfer:");
+            int money = Integer.parseInt(reader.readLine());
+            if (money > fromAccount.getBalance()) {
+                System.out.println("Not enough money");
+            } else {
+                DBOperations.decBalance(money, fromAccount);
+                DBOperations.incBalance(money, toAccount);
+                System.out.println("Success");
+            }
+        }
+    }
+
+    private static synchronized void createAccount() {
         String identificationNumber = generateRandomNumber(9);
         String cardNumber = applyLuhnAlgorithm(identificationNumber);
-        Account account = new Account(cardNumber, generateRandomNumber(4));
+//        System.out.println(DBOperations.getCardsAmount());
+        Account account = new Account(DBOperations.getCardsAmount() + 1, cardNumber, generateRandomNumber(4));
         DBOperations.insert(account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
+        DBOperations.selectAll();
+    }
+
+    private static void addIncome(String income, Account account) {
+        DBOperations.incBalance(Integer.parseInt(income), account);
 //        DBOperations.selectAll();
     }
 
@@ -90,7 +136,9 @@ public class Main {
             for (int i = 0; i < length; i++) {
                 randomNumber.append(random.nextInt(10));
             }
-            if (!DBOperations.selectCardByNumber(randomNumber.toString())) {
+            if (length == 9 && !DBOperations.isDuplicate(randomNumber.insert(0, "400000").toString())) {
+                return randomNumber.toString();
+            } else if (length == 4) {
                 return randomNumber.toString();
             }
         }
@@ -104,8 +152,7 @@ public class Main {
         return null;
     }
 
-    private static String applyLuhnAlgorithm(String accountIdentifier) {
-        String cardNumber = "400000" + accountIdentifier;
+    private static String applyLuhnAlgorithm(String cardNumber) {
         char[] numbers = cardNumber.toCharArray();
         List<Integer> algorithmResult = new ArrayList<>();
         for (int i = 0; i < cardNumber.length(); i++) {

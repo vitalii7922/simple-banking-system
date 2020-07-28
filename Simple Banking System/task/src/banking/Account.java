@@ -15,6 +15,13 @@ public class Account {
         balance = 0;
     }
 
+    public Account(long id, String cardNumber, String cardPIN) {
+        this.id = id;
+        this.cardNumber = cardNumber;
+        this.cardPIN = cardPIN;
+        this.balance = 0;
+    }
+
     public long getId() {
         return id;
     }
