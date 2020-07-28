@@ -89,11 +89,11 @@ public class DBOperations {
     public static void createNewTable() {
         // SQLite connection string
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS card (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	number text NOT NULL,\n"
-                + "	pin text NOT NULL,\n"
-                + "	balance integer DEFAULT 0\n"
+        String sql = "CREATE TABLE IF NOT EXISTS card ("
+                + "	id INTEGER,"
+                + "	number TEXT,"
+                + "	pin TEXT,"
+                + "	balance INTEGER DEFAULT 0"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(url);
