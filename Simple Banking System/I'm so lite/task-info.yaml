@@ -510,9 +510,6 @@ files:
 - name: src/banking/Account.java
   visible: true
   learner_created: true
-- name: card.s3db
-  visible: true
-  learner_created: true
 - name: src/banking/DBOperations.java
   visible: true
   learner_created: true

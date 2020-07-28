@@ -18,13 +18,12 @@ public class DBOperations {
      * @param
      */
     public static void insert(Account account) {
-        String sql = "INSERT INTO card(id,number,pin) VALUES(?,?,?)";
+        String sql = "INSERT INTO card(number,pin) VALUES(?,?)";
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setLong(1, account.getId());
-            pstmt.setString(2, account.getCardNumber());
-            pstmt.setString(3, account.getCardPIN());
+            pstmt.setString(1, account.getCardNumber());
+            pstmt.setString(2, account.getCardPIN());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -32,7 +31,7 @@ public class DBOperations {
     }
 
     public static Account selectCard(String cardNumber, String pin) {
-        String sql = "SELECT number, pin, FROM card WHERE number = ? AND pin = ?";
+        String sql = "SELECT number, pin FROM card WHERE number = ? AND pin = ?";
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -50,6 +49,22 @@ public class DBOperations {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static boolean selectCardByNumber(String cardNumber) {
+        String sql = "SELECT number FROM card WHERE number = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, cardNumber);
+            Account account = new Account();
+            // loop through the result set
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
 
@@ -75,16 +90,47 @@ public class DBOperations {
         // SQLite connection string
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS card (\n"
-                + "	id integer PRIMARY KEY AUTOINCREMENT,\n"
+                + "	id INTEGER PRIMARY KEY,\n"
                 + "	number text NOT NULL,\n"
-                + "	pin text NOT NULL\n"
-                + "	balance integer default 0\n"
+                + "	pin text NOT NULL,\n"
+                + "	balance integer DEFAULT 0\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
             // create a new table
             stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void delete(int id) {
+        String sql = "DELETE FROM card WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void dropTable() {
+        String sql = "DROP TABLE card";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            // execute the delete statement
+            pstmt.execute();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -7,7 +7,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    private static final Map<Long, Account> accounts = new HashMap<>();
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final Random random = new Random();
     private static boolean exit = false;
@@ -15,8 +14,6 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         DBOperations.setUrl(args[1]);
         DBOperations.createNewTable();
-//        Thread.sleep(1000);
-//        DBOperations.selectAll();
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
@@ -29,7 +26,7 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("\nEnter your card number:");
-                    long cardNumber = Long.parseLong(reader.readLine());
+                    String cardNumber = reader.readLine();
                     System.out.println("Enter your PIN:");
                     String numberPIN = reader.readLine();
                     Account account = logIn(cardNumber, numberPIN);
@@ -79,11 +76,11 @@ public class Main {
         String identificationNumber = generateRandomNumber(9);
         String cardNumber = applyLuhnAlgorithm(identificationNumber);
         Account account = new Account(cardNumber, generateRandomNumber(4));
-//        accounts.put(Long.parseLong(cardNumber), account);
         DBOperations.insert(account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
+//        DBOperations.selectAll();
     }
 
     private static String generateRandomNumber(int length) {
@@ -92,20 +89,15 @@ public class Main {
             for (int i = 0; i < length; i++) {
                 randomNumber.append(random.nextInt(10));
             }
-            if (accounts.get(Long.parseLong(randomNumber.toString())) == null) {
+            if (!DBOperations.selectCardByNumber(randomNumber.toString())) {
                 return randomNumber.toString();
             }
         }
     }
 
-    private static Account logIn(long cardNumber, String cardPIN) {
-//        return accounts
-//                .values()
-//                .stream()
-//                .filter(x -> Long.parseLong(x.getCardNumber()) == cardNumber && x.getCardPIN().equals(cardPIN))
-//                .collect(Collectors.toList());
-        Account account = accounts.get(cardNumber);
-        if (account != null && account.getCardPIN().equals(cardPIN)) {
+    private static Account logIn(String cardNumber, String cardPIN) {
+        Account account = DBOperations.selectCard(cardNumber, cardPIN);
+        if (account != null && account.getCardNumber() != null) {
             return account;
         }
         return null;
@@ -113,7 +105,6 @@ public class Main {
 
     private static String applyLuhnAlgorithm(String accountIdentifier) {
         String cardNumber = "400000" + accountIdentifier;
-//        System.out.println(cardNumber);
         char[] numbers = cardNumber.toCharArray();
         List<Integer> algorithmResult = new ArrayList<>();
         for (int i = 0; i < cardNumber.length(); i++) {
@@ -127,7 +118,6 @@ public class Main {
                 .stream()
                 .map(x -> x > 9 ? x - 9 : x)
                 .collect(Collectors.toList());
-//        algorithmResult.forEach(System.out::print);
         return addCheckSumNumber(algorithmResult
                 .stream()
                 .mapToInt(Integer::intValue)
