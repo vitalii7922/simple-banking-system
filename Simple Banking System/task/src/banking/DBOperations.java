@@ -1,7 +1,5 @@
 package banking;
-
 import java.sql.*;
-import java.util.AbstractCollection;
 
 public class DBOperations {
 
