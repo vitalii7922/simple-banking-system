@@ -1,5 +1,4 @@
 package banking;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,8 +18,7 @@ public class Main {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
             System.out.println("0. Exit");
-            String command = reader.readLine();
-            switch (command) {
+            switch (reader.readLine()) {
                 case "1":
                     createAccount();
                     System.out.println();
@@ -59,8 +57,7 @@ public class Main {
             System.out.println("4. Close account");
             System.out.println("5. Log out");
             System.out.println("0. Exit");
-            String command = reader.readLine();
-            switch (command) {
+            switch (reader.readLine()) {
                 case "1":
                     account = DBOperations.selectCardById(account.getId());
                     assert account != null;
@@ -114,35 +111,42 @@ public class Main {
         }
     }
 
-    private static synchronized void createAccount() {
-        String identificationNumber = generateRandomNumber(9);
-        String cardNumber = applyLuhnAlgorithm(identificationNumber);
-        Account account = new Account(DBOperations.getCardsAmount() + 1L, cardNumber, generateRandomNumber(4));
+    private static void createAccount() {
+        String cardNumberWithoutCheckSum = generateCardNumber();
+        String cardNumber = applyLuhnAlgorithm(cardNumberWithoutCheckSum);
+        Account account = new Account(cardNumber, generateCardPIN());
         DBOperations.insert(account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
-        DBOperations.selectAll();
+//        DBOperations.selectAll();
     }
 
     private static void addIncome(String income, Account account) {
         DBOperations.incBalance(Integer.parseInt(income), account);
-//        DBOperations.selectAll();
     }
 
-    private static String generateRandomNumber(int length) {
+    private static StringBuilder generateRandomNumber(int length) {
         StringBuilder randomNumber = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            randomNumber.append(random.nextInt(10));
+        }
+        return randomNumber;
+    }
+
+    private static String generateCardNumber() {
         while (true) {
-            for (int i = 0; i < length; i++) {
-                randomNumber.append(random.nextInt(10));
-            }
-            if (length == 9 && !DBOperations.isDuplicate(randomNumber.insert(0, "400000").toString())) {
-                return randomNumber.toString();
-            } else if (length == 4) {
-                return randomNumber.toString();
+            StringBuilder cardNumber = generateRandomNumber(9);
+            if (!DBOperations.isDuplicate(cardNumber.insert(0, "400000").toString())) {
+                return cardNumber.toString();
             }
         }
     }
+
+    private static String generateCardPIN() {
+        return generateRandomNumber(4).toString();
+    }
+
 
     private static Account logIn(String cardNumber, String cardPIN) {
         Account account = DBOperations.selectCard(cardNumber, cardPIN);
@@ -175,7 +179,6 @@ public class Main {
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
         for (int i = 0; i < 10; i++) {
             if ((cardNumberSum + i) % 10 == 0) {
-                System.out.println(cardNumber + i);
                 return cardNumber + i;
             }
         }
