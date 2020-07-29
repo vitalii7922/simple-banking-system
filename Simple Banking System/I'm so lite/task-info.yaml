@@ -510,20 +510,16 @@ files:
 - name: src/banking/Account.java
   visible: true
   learner_created: true
-- name: card.s3db
-  visible: true
-  learner_created: true
 - name: src/banking/DBOperations.java
   visible: true
   learner_created: true
+- name: card.s3db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/517/implement
-status: Failed
+status: Solved
 feedback:
-  message: "Wrong answer in test #4\n\nYour table should have columns described in\
-    \ the stage instructions.\n\nPlease find below the output of your program during\
-    \ this failed test.\nNote that the &#39;&gt;&#39; character indicates the beginning\
-    \ of the input line.\n\n---\n\nArguments: -fileName card.s3db\n\n-fileName \n\
-    card.s3db \njdbc:sqlite:card.s3db\n1. Create an account\n2. Log into account\n\
-    0. Exit\n&gt; 0\n\nBye!"
-  time: Mon, 27 Jul 2020 17:15:58 UTC
-record: -1
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/93/stages/517/implement">JetBrains
+    Academy</a>
+  time: Tue, 28 Jul 2020 09:52:06 UTC
+record: 3

@@ -7,16 +7,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    private static final Map<Long, Account> accounts = new HashMap<>();
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final Random random = new Random();
     private static boolean exit = false;
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         DBOperations.setUrl(args[1]);
         DBOperations.createNewTable();
-//        Thread.sleep(1000);
-//        DBOperations.selectAll();
+//        DBOperations.dropTable();
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
@@ -29,7 +27,7 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("\nEnter your card number:");
-                    long cardNumber = Long.parseLong(reader.readLine());
+                    String cardNumber = reader.readLine();
                     System.out.println("Enter your PIN:");
                     String numberPIN = reader.readLine();
                     Account account = logIn(cardNumber, numberPIN);
@@ -56,15 +54,35 @@ public class Main {
     private static void inAccount(Account account) throws IOException {
         while (true) {
             System.out.println("1. Balance");
-            System.out.println("2. Log out");
+            System.out.println("2. Add income");
+            System.out.println("3. Do transfer");
+            System.out.println("4. Close account");
+            System.out.println("5. Log out");
             System.out.println("0. Exit");
             String command = reader.readLine();
             switch (command) {
                 case "1":
+                    account = DBOperations.selectCardById(account.getId());
+                    assert account != null;
                     System.out.printf("%nBalance: %d%n%n", account.getBalance());
                     break;
                 case "2":
-                    System.out.println("\nYou have successfully logged out!\n");
+                    System.out.println("\nEnter income:");
+                    addIncome(reader.readLine(), DBOperations.selectCardById(account.getId()));
+                    System.out.println("Income was added\n");
+                    break;
+                case "3":
+                    System.out.println("\nTransfer");
+                    System.out.println("Enter card number:");
+                    String toAccount = reader.readLine();
+                    doTransfer(toAccount, DBOperations.selectCardById(account.getId()));
+                    break;
+                case "4":
+                    DBOperations.deleteAccount(account.getId());
+                    System.out.println("\nThe account has been closed!\n");
+                    return;
+                case "5":
+                    System.out.println();
                     return;
                 case "0":
                     exit = true;
@@ -75,15 +93,41 @@ public class Main {
         }
     }
 
-    private static void createAccount() {
+    private static void doTransfer(String toAccountNumber, Account fromAccount) throws IOException {
+        if (!toAccountNumber.equals(applyLuhnAlgorithm(toAccountNumber.substring(0, 15)))) {
+            System.out.println("Probably you made mistake in the card number. Please try again!\n");
+            return;
+        }
+        Account toAccount = DBOperations.selectCardByNumber(toAccountNumber);
+        if (toAccount == null) {
+            System.out.println("Such a card doesn't exist\n");
+        } else {
+            System.out.println("Enter how much money you want to transfer:");
+            int money = Integer.parseInt(reader.readLine());
+            if (money > fromAccount.getBalance()) {
+                System.out.println("Not enough money\n");
+            } else {
+                DBOperations.decBalance(money, fromAccount);
+                DBOperations.incBalance(money, toAccount);
+                System.out.println("Success\n");
+            }
+        }
+    }
+
+    private static synchronized void createAccount() {
         String identificationNumber = generateRandomNumber(9);
         String cardNumber = applyLuhnAlgorithm(identificationNumber);
-        Account account = new Account(cardNumber, generateRandomNumber(4));
-//        accounts.put(Long.parseLong(cardNumber), account);
+        Account account = new Account(DBOperations.getCardsAmount() + 1L, cardNumber, generateRandomNumber(4));
         DBOperations.insert(account);
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
+        DBOperations.selectAll();
+    }
+
+    private static void addIncome(String income, Account account) {
+        DBOperations.incBalance(Integer.parseInt(income), account);
+//        DBOperations.selectAll();
     }
 
     private static String generateRandomNumber(int length) {
@@ -92,28 +136,23 @@ public class Main {
             for (int i = 0; i < length; i++) {
                 randomNumber.append(random.nextInt(10));
             }
-            if (accounts.get(Long.parseLong(randomNumber.toString())) == null) {
+            if (length == 9 && !DBOperations.isDuplicate(randomNumber.insert(0, "400000").toString())) {
+                return randomNumber.toString();
+            } else if (length == 4) {
                 return randomNumber.toString();
             }
         }
     }
 
-    private static Account logIn(long cardNumber, String cardPIN) {
-//        return accounts
-//                .values()
-//                .stream()
-//                .filter(x -> Long.parseLong(x.getCardNumber()) == cardNumber && x.getCardPIN().equals(cardPIN))
-//                .collect(Collectors.toList());
-        Account account = accounts.get(cardNumber);
-        if (account != null && account.getCardPIN().equals(cardPIN)) {
+    private static Account logIn(String cardNumber, String cardPIN) {
+        Account account = DBOperations.selectCard(cardNumber, cardPIN);
+        if (account != null && account.getCardNumber() != null) {
             return account;
         }
         return null;
     }
 
-    private static String applyLuhnAlgorithm(String accountIdentifier) {
-        String cardNumber = "400000" + accountIdentifier;
-//        System.out.println(cardNumber);
+    private static String applyLuhnAlgorithm(String cardNumber) {
         char[] numbers = cardNumber.toCharArray();
         List<Integer> algorithmResult = new ArrayList<>();
         for (int i = 0; i < cardNumber.length(); i++) {
@@ -127,7 +166,6 @@ public class Main {
                 .stream()
                 .map(x -> x > 9 ? x - 9 : x)
                 .collect(Collectors.toList());
-//        algorithmResult.forEach(System.out::print);
         return addCheckSumNumber(algorithmResult
                 .stream()
                 .mapToInt(Integer::intValue)
@@ -137,6 +175,7 @@ public class Main {
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
         for (int i = 0; i < 10; i++) {
             if ((cardNumberSum + i) % 10 == 0) {
+                System.out.println(cardNumber + i);
                 return cardNumber + i;
             }
         }
