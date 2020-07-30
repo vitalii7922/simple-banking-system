@@ -11,7 +11,7 @@ public class Main {
     private static boolean exit = false;
 
     public static void main(String[] args) throws IOException {
-        DBOperations.setUrl(args[1]);
+        DBOperations.setUrl(args[1]); //set url to connect to DB, first argument is a name of a table
         DBOperations.createNewTable();
 //        DBOperations.dropTable();
         while (true) {
@@ -49,6 +49,12 @@ public class Main {
         }
     }
 
+    /**
+     * menu options for working with an account data
+     *
+     * @param account account
+     * @throws IOException
+     */
     private static void inAccount(Account account) throws IOException {
         while (true) {
             System.out.println("1. Balance");
@@ -90,6 +96,13 @@ public class Main {
         }
     }
 
+    /**
+     * transfer money between accounts
+     *
+     * @param toAccountNumber balance of this account will be increased
+     * @param fromAccount money will be taken from this account
+     * @throws IOException
+     */
     private static void doTransfer(String toAccountNumber, Account fromAccount) throws IOException {
         if (!toAccountNumber.equals(applyLuhnAlgorithm(toAccountNumber.substring(0, 15)))) {
             System.out.println("Probably you made mistake in the card number. Please try again!\n");
@@ -111,6 +124,9 @@ public class Main {
         }
     }
 
+    /**
+     * create an account
+     */
     private static void createAccount() {
         String cardNumberWithoutCheckSum = generateCardNumber();
         String cardNumber = applyLuhnAlgorithm(cardNumberWithoutCheckSum);
@@ -122,10 +138,22 @@ public class Main {
 //        DBOperations.selectAll();
     }
 
+    /**
+     * increase balance of an account
+     *
+     * @param income money
+     * @param account account object
+     */
     private static void addIncome(String income, Account account) {
         DBOperations.incBalance(Integer.parseInt(income), account);
     }
 
+    /**
+     * generate sequence of non duplicate random numbers
+     *
+     * @param length number of characters
+     * @return random number with length 9 or 4 characters
+     */
     private static StringBuilder generateRandomNumber(int length) {
         StringBuilder randomNumber = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -134,15 +162,25 @@ public class Main {
         return randomNumber;
     }
 
+    /**
+     *
+     *create card number
+     *
+     * @return generated card number(it's length 15 characters)
+     */
     private static String generateCardNumber() {
         while (true) {
-            StringBuilder cardNumber = generateRandomNumber(9);
+            StringBuilder cardNumber = generateRandomNumber(9); //it generates account identifier
+            //insert a bank identification number (400000) and check that this number is not duplicating
             if (!DBOperations.isDuplicate(cardNumber.insert(0, "400000").toString())) {
                 return cardNumber.toString();
             }
         }
     }
 
+    /**
+     * @return PIN of a card(it's length 4 characters)
+     */
     private static String generateCardPIN() {
         return generateRandomNumber(4).toString();
     }
@@ -156,6 +194,12 @@ public class Main {
         return null;
     }
 
+    /**
+     * multiply by two each odd number and subtract 9 from numbers that over 9
+     *
+     * @param cardNumber of an account
+     * @return sum of digits in changed card number according to Luhm algorithm
+     */
     private static String applyLuhnAlgorithm(String cardNumber) {
         char[] numbers = cardNumber.toCharArray();
         List<Integer> algorithmResult = new ArrayList<>();
@@ -176,6 +220,14 @@ public class Main {
                 .sum(), cardNumber);
     }
 
+
+    /**
+     * find last number that will give sum of numbers divisible by 10 without reminder
+     *
+     * @param cardNumberSum sum of digits of a card number
+     * @param cardNumber card number
+     * @return card number(16 digits with check sum number)
+     */
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
         for (int i = 0; i < 10; i++) {
             if ((cardNumberSum + i) % 10 == 0) {

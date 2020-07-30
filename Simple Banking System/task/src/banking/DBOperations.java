@@ -2,6 +2,8 @@ package banking;
 
 import java.sql.*;
 
+
+
 public class DBOperations {
 
     private static String url;
@@ -15,6 +17,11 @@ public class DBOperations {
         DBOperations.url = "jdbc:sqlite:" + fileName;
     }
 
+    /**insert an account entity to DB
+     *
+     *
+     * @param account account entity
+     */
     public static void insert(Account account) {
         String sql = "INSERT INTO card(id, number,pin) VALUES(?, ?,?)";
         try (Connection connection = DriverManager.getConnection(url);
@@ -27,6 +34,13 @@ public class DBOperations {
         }
     }
 
+    /**
+     * find an account by a card number and card PIN
+     *
+     * @param cardNumber card number
+     * @param pin card pin
+     * @return account object
+     */
     public static Account selectCard(String cardNumber, String pin) {
         String sql = "SELECT id, number, pin FROM card WHERE number = ? AND pin = ?";
         try (Connection connection = DriverManager.getConnection(url);
@@ -49,12 +63,18 @@ public class DBOperations {
         return null;
     }
 
+    /**
+     * find an account by a card number
+     *
+     * @param cardNumber card number
+     *
+     * @return account object
+     */
     public static Account selectCardByNumber(String cardNumber) {
         String sql = "SELECT id, number, pin, balance FROM card WHERE number = ?";
         try (Connection connection = DriverManager.getConnection(url);
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, cardNumber);
-            // loop through the result set
             Account account = null;
             try(ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -72,6 +92,12 @@ public class DBOperations {
         return null;
     }
 
+    /**
+     * check that a new generated card number isn't in DB to avoid duplicates of cards's numbers
+     *
+     * @param cardNumber card number
+     * @return boolean result
+     */
     public static boolean isDuplicate(String cardNumber) {
         String sql = "SELECT number FROM card";
         try (Connection connection = DriverManager.getConnection(url);
@@ -88,6 +114,12 @@ public class DBOperations {
         return false;
     }
 
+    /**
+     * find a card by id
+     *
+     * @param id  account id
+     * @return account object
+     */
     public static Account selectCardById(long id) {
         String sql = "SELECT number, pin, balance  FROM card WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url);
@@ -111,6 +143,9 @@ public class DBOperations {
     }
 
 
+    /**
+     * print list of accounts
+     */
     public static void selectAll() {
         String sql = "SELECT id, number, pin, balance FROM card";
         try (Connection connection = DriverManager.getConnection(url);
@@ -127,12 +162,15 @@ public class DBOperations {
         }
     }
 
+    /**
+     * create new table
+     */
     public static void createNewTable() {
         String sql = "CREATE TABLE IF NOT EXISTS card ("
-                + "	id INTEGER PRIMARY KEY,"
-                + "	number TEXT,"
-                + "	pin TEXT,"
-                + "	balance INTEGER DEFAULT 0"
+                + "id INTEGER PRIMARY KEY,"
+                + "number TEXT,"
+                + "pin TEXT,"
+                + "balance INTEGER DEFAULT 0"
                 + ");";
         try (Connection connection = DriverManager.getConnection(url);
              Statement stmt = connection.createStatement()) {
@@ -142,6 +180,12 @@ public class DBOperations {
         }
     }
 
+    /**
+     * increase balance of an account
+     *
+     * @param income amount of money
+     * @param account account entity
+     */
     public static void incBalance(int income, Account account) {
         String query = "UPDATE card SET balance = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url);
@@ -154,6 +198,12 @@ public class DBOperations {
         }
     }
 
+    /**
+     * decrease balance of an account
+     *
+     * @param expenses amount of money
+     * @param account account entity
+     */
     public static void decBalance(int expenses, Account account) {
         String query = "UPDATE card SET balance = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url);
@@ -166,6 +216,9 @@ public class DBOperations {
         }
     }
 
+    /**
+     * @param id account id
+     */
     public static void deleteAccount(long id) {
         String sql = "DELETE FROM card WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url);
@@ -177,6 +230,9 @@ public class DBOperations {
         }
     }
 
+    /**
+     * drop table
+     */
     public static void dropTable() {
         String sql = "DROP TABLE card";
         try (Connection connection = DriverManager.getConnection(url);
