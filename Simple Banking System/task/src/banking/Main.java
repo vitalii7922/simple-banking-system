@@ -114,12 +114,14 @@ public class Main {
         } else {
             System.out.println("Enter how much money you want to transfer:");
             int money = Integer.parseInt(reader.readLine());
-            if (money > fromAccount.getBalance()) {
-                System.out.println("Not enough money\n");
-            } else {
+            if (money <= 0) {
+                System.out.println("You entered zero or a negative number\n");
+            } else if(money <= fromAccount.getBalance()) {
                 DBOperations.decBalance(money, fromAccount);
                 DBOperations.incBalance(money, toAccount);
                 System.out.println("Success\n");
+            } else {
+                System.out.println("Not enough money\n");
             }
         }
     }

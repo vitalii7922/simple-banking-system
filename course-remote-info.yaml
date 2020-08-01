@@ -102,6 +102,8 @@ topics:
   2:
   - title: Files
     theory_id: 6989
+  - title: Introduction to databases
+    theory_id: 8497
   - title: What is SQL
     theory_id: 7054
   - title: Basic data types
@@ -118,14 +120,6 @@ topics:
     theory_id: 8611
   - title: SELECT FROM WHERE statement
     theory_id: 8619
-  - title: Basic INSERT statement
-    theory_id: 9059
-  - title: Basic UPDATE statement
-    theory_id: 9067
-  - title: Basic CREATE statement
-    theory_id: 9084
-  - title: Introduction to databases
-    theory_id: 8497
   - title: Computer programming
     theory_id: 8739
   - title: What is an exception
@@ -134,6 +128,12 @@ topics:
     theory_id: 3570
   - title: Exception handling
     theory_id: 3552
+  - title: Basic INSERT statement
+    theory_id: 9059
+  - title: Basic UPDATE statement
+    theory_id: 9067
+  - title: Basic CREATE statement
+    theory_id: 9084
   - title: Introduction to operating systems
     theory_id: 9704
   - title: Command line overview
@@ -146,6 +146,8 @@ topics:
     theory_id: 3636
   - title: Connecting to a database with JDBC
     theory_id: 9519
+  - title: JDBC Statements
+    theory_id: 9955
   - title: The main method
     theory_id: 3489
   - title: Arrays as parameters
