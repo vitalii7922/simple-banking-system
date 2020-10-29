@@ -5,6 +5,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Menu for operating with  banking accounts
+ */
 public class Main {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final Random random = new Random();
@@ -13,7 +16,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         DBOperations.setUrl(args[1]); //set url to connect to DB, first argument is a name of a table
         DBOperations.createNewTable();
-//        DBOperations.dropTable();
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
@@ -137,7 +139,6 @@ public class Main {
         System.out.println("\nYour card has been created");
         System.out.printf("Your card number: %n%s%n", account.getCardNumber());
         System.out.printf("Your card PIN: %n%s%n", account.getCardPIN());
-//        DBOperations.selectAll();
     }
 
     /**

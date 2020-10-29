@@ -1,5 +1,8 @@
 package banking;
 
+/**
+ * User's banking account
+ */
 public class Account {
     private long id;
     private String cardNumber;

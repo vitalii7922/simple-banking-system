@@ -18,8 +18,22 @@ topics:
     theory_id: 6865
   - title: Introduction to OOP
     theory_id: 3614
+  - title: Functional decomposition
+    theory_id: 10570
   - title: IDE
-    theory_id: 3805
+    theory_id: 10996
+  - title: What is an exception
+    theory_id: 3497
+  - title: Hierarchy of exceptions
+    theory_id: 3570
+  - title: Exception handling
+    theory_id: 3552
+  - title: Introduction to operating systems
+    theory_id: 9704
+  - title: Command line overview
+    theory_id: 8977
+  - title: Parameters and options
+    theory_id: 9746
   - title: Introduction to Java
     theory_id: 3500
   - title: Basic literals
@@ -68,12 +82,16 @@ topics:
     theory_id: 3498
   - title: Branching statements
     theory_id: 3507
+  - title: Switch statement
+    theory_id: 3504
   - title: Iterating over arrays
     theory_id: 3602
   - title: Multi-dimensional array
     theory_id: 1933
   - title: Defining methods
     theory_id: 3590
+  - title: The main method
+    theory_id: 3489
   - title: IntelliJ IDEA
     theory_id: 3801
   - title: IDEA Basics
@@ -82,23 +100,53 @@ topics:
     theory_id: 5839
   - title: Write, compile, and run
     theory_id: 3739
+  - title: JVM, JRE, and JDK
+    theory_id: 3499
+  - title: Errors in programs
+    theory_id: 3536
   - title: Defining classes
     theory_id: 3618
-  - title: Objects
-    theory_id: 4727
-  - title: Random
-    theory_id: 4910
-  1:
   - title: Package
     theory_id: 3621
   - title: Constructor
     theory_id: 3535
+  - title: Objects
+    theory_id: 4727
   - title: Instance methods
     theory_id: 3495
   - title: Access modifiers
     theory_id: 3589
   - title: Getters and setters
     theory_id: 3599
+  - title: Random
+    theory_id: 4910
+  - title: Inheritance
+    theory_id: 3583
+  - title: Running programs on your computer
+    theory_id: 3746
+  1:
+  - title: Files
+    theory_id: 3635
+  - title: Reading files
+    theory_id: 3636
+  - title: Arrays as parameters
+    theory_id: 3594
+  - title: Build tools
+    theory_id: 4284
+  - title: Java Archive
+    theory_id: 4311
+  - title: Command-line arguments
+    theory_id: 3566
+  - title: IntelliJ Run Configurations
+    theory_id: 10630
+  - title: Gradle basics
+    theory_id: 5075
+  - title: Basic project with Gradle
+    theory_id: 5077
+  - title: Building apps using Gradle
+    theory_id: 7917
+  - title: Dependency management
+    theory_id: 5076
   2:
   - title: Files
     theory_id: 6989
@@ -120,62 +168,24 @@ topics:
     theory_id: 8611
   - title: SELECT FROM WHERE statement
     theory_id: 8619
-  - title: Computer programming
-    theory_id: 8739
-  - title: What is an exception
-    theory_id: 3497
-  - title: Hierarchy of exceptions
-    theory_id: 3570
-  - title: Exception handling
-    theory_id: 3552
-  - title: Basic INSERT statement
-    theory_id: 9059
   - title: Basic UPDATE statement
     theory_id: 9067
   - title: Basic CREATE statement
     theory_id: 9084
-  - title: Introduction to operating systems
-    theory_id: 9704
-  - title: Command line overview
-    theory_id: 8977
-  - title: Parameters and options
-    theory_id: 9746
-  - title: Files
-    theory_id: 3635
-  - title: Reading files
-    theory_id: 3636
+  - title: Alter table
+    theory_id: 9579
+  - title: Consistency constraints
+    theory_id: 9587
+  - title: Basic INSERT statement
+    theory_id: 9059
   - title: Connecting to a database with JDBC
     theory_id: 9519
   - title: JDBC Statements
     theory_id: 9955
-  - title: The main method
-    theory_id: 3489
-  - title: Arrays as parameters
-    theory_id: 3594
-  - title: JVM, JRE, and JDK
-    theory_id: 3499
-  - title: Errors in programs
-    theory_id: 3536
-  - title: Inheritance
-    theory_id: 3583
-  - title: Build tools
-    theory_id: 4284
-  - title: Running programs on your computer
-    theory_id: 3746
-  - title: Java Archive
-    theory_id: 4311
-  - title: Command-line arguments
-    theory_id: 3566
-  - title: Gradle basics
-    theory_id: 5075
-  - title: Basic project with Gradle
-    theory_id: 5077
-  - title: Building apps using Gradle
-    theory_id: 7917
-  - title: Dependency management
-    theory_id: 5076
   3:
   - title: Results ordering
     theory_id: 8627
   - title: Basic DELETE statement
     theory_id: 9075
+  - title: Updating selected rows
+    theory_id: 9603

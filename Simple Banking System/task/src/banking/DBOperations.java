@@ -3,7 +3,9 @@ package banking;
 import java.sql.*;
 
 
-
+/**
+ * DB operations with a banking account
+ */
 public class DBOperations {
 
     private static String url;
