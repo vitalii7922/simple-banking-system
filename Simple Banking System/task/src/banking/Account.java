@@ -9,7 +9,7 @@ public class Account {
     private String cardPIN;
     private int balance;
 
-    public Account() {
+    Account() {
     }
 
     public Account(String cardNumber, String cardPIN) {
@@ -25,35 +25,35 @@ public class Account {
         this.balance = 0;
     }
 
-    public long getId() {
+    long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    void setId(long id) {
         this.id = id;
     }
 
-    public String getCardNumber() {
+    String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(String cardNumber) {
+    void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
-    public String getCardPIN() {
+    String getCardPIN() {
         return cardPIN;
     }
 
-    public void setCardPIN(String cardPIN) {
+    void setCardPIN(String cardPIN) {
         this.cardPIN = cardPIN;
     }
 
-    public int getBalance() {
+    int getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    void setBalance(int balance) {
         this.balance = balance;
     }
 }

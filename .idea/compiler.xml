@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="11">
       <module name="Simple_Banking_System-task_main" target="11" />
       <module name="Simple_Banking_System-task_test" target="11" />
+      <module name="Simple_Banking_System_main" target="11" />
+      <module name="Simple_Banking_System_test" target="11" />
       <module name="util_main" target="11" />
       <module name="util_test" target="11" />
     </bytecodeTargetLevel>
