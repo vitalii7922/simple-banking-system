@@ -1,3 +1,13 @@
 
-d
-java:S2095+"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş8¥‹İ‹¹.
+Z	java:S106?"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+Z	java:S106#"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106£"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+Z	java:S106r"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+V	java:S106"9Replace this use of System.out or System.err by a logger.(àèã¼8ù«è°×.
+[	java:S106Ç"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106Ù"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106ç"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+Z	java:S106\"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106ô"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.
+[	java:S106µ"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ù«è°×.

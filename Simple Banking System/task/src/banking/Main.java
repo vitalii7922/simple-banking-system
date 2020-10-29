@@ -1,8 +1,11 @@
 package banking;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -102,7 +105,7 @@ public class Main {
      * transfer money between accounts
      *
      * @param toAccountNumber balance of this account will be increased
-     * @param fromAccount money will be taken from this account
+     * @param fromAccount     money will be taken from this account
      * @throws IOException
      */
     private static void doTransfer(String toAccountNumber, Account fromAccount) throws IOException {
@@ -118,7 +121,7 @@ public class Main {
             int money = Integer.parseInt(reader.readLine());
             if (money <= 0) {
                 System.out.println("You entered zero or a negative number\n");
-            } else if(money <= fromAccount.getBalance()) {
+            } else if (money <= fromAccount.getBalance()) {
                 DBOperations.decBalance(money, fromAccount);
                 DBOperations.incBalance(money, toAccount);
                 System.out.println("Success\n");
@@ -144,7 +147,7 @@ public class Main {
     /**
      * increase balance of an account
      *
-     * @param income money
+     * @param income  money
      * @param account account object
      */
     private static void addIncome(String income, Account account) {
@@ -166,8 +169,7 @@ public class Main {
     }
 
     /**
-     *
-     *create card number
+     * create card number
      *
      * @return generated card number(it's length 15 characters)
      */
@@ -228,7 +230,7 @@ public class Main {
      * find last number that will give sum of numbers divisible by 10 without reminder
      *
      * @param cardNumberSum sum of digits of a card number
-     * @param cardNumber card number
+     * @param cardNumber    card number
      * @return card number(16 digits with check sum number)
      */
     private static String addCheckSumNumber(int cardNumberSum, String cardNumber) {
