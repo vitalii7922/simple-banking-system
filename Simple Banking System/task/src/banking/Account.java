@@ -12,7 +12,7 @@ public class Account {
     Account() {
     }
 
-    public Account(String cardNumber, String cardPIN) {
+    Account(String cardNumber, String cardPIN) {
         this.cardNumber = cardNumber;
         this.cardPIN = cardPIN;
         balance = 0;

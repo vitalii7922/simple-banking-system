@@ -702,10 +702,23 @@ files:
 - name: card.s3db
   visible: true
   learner_created: true
+- name: tempDatabase.s3db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/518/implement
-status: Solved
+status: Failed
 feedback:
-  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/93/stages/518/implement">JetBrains
-    Academy</a>
-  time: Thu, 29 Oct 2020 21:20:11 UTC
+  message: "Wrong answer in test #5\n\nBalance should be 0!\n\nPlease find below the\
+    \ output of your program during this failed test.\nNote that the &#39;&gt;&#39;\
+    \ character indicates the beginning of the input line.\n\n---\n\nArguments: -fileName\
+    \ card.s3db\n\n1. Create an account\n2. Log into account\n0. Exit\n&gt; 1\n\n\
+    Your card has been created\nYour card number: \n4000003934844255\nYour card PIN:\
+    \ \n1107\n\n1. Create an account\n2. Log into account\n0. Exit\n&gt; 1\n\nYour\
+    \ card has been created\nYour card number: \n4000002758571085\nYour card PIN:\
+    \ \n2148\n\n1. Create an account\n2. Log into account\n0. Exit\n&gt; 1\n\nYour\
+    \ card has been created\nYour card number: \n4000000926420904\nYour card PIN:\
+    \ \n9666\n\n1. Create an account\n2. Log into account\n0. Exit\n&gt; 1\n\nYour\
+    \ card has been created\nYour card number: \n4000007162137324\nYour card PIN:\
+    \ \n4568\n\n1. Create an account\n2. Log into account\n0. Exit\n&gt; 0\n\nBye!"
+  time: Thu, 29 Oct 2020 23:51:33 UTC
 record: -1

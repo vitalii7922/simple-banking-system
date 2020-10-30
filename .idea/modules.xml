@@ -6,8 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task.iml" group="Simple_Banking_System/Simple_Banking_System-task" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task_main.iml" group="Simple_Banking_System/Simple_Banking_System-task" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Simple Banking System/task/Simple_Banking_System-task_test.iml" group="Simple_Banking_System/Simple_Banking_System-task" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Simple_Banking_System_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Simple_Banking_System_main.iml" group="Simple_Banking_System" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Simple_Banking_System_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Simple_Banking_System_test.iml" group="Simple_Banking_System" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util.iml" group="Simple_Banking_System/util" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_main.iml" group="Simple_Banking_System/util" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_test.iml" group="Simple_Banking_System/util" />
