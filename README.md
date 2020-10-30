@@ -10,7 +10,7 @@ Used technologies:
 * Java version: 11.0.4
 * SQL 3.8.11.2
 __________ 
-Run simple banking system
+###Run simple banking system
 
 gradle run
 __________ 
