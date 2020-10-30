@@ -9,19 +9,20 @@ __________
 Used technologies:
 * Java version: 11.0.4
 * SQL 3.8.11.2
-__________ 
-###Run simple banking system
+__________  
+## Run simple banking system
 
 gradle run
-__________ 
-##Description
+__________  
+## Description
+
 Examples of working in the console of Intellij IDEA:
 
 Create an account\
-![1](https://user-images.githubusercontent.com/51421459/97646927-08b30800-1a62-11eb-84eb-535c5cc23c50.jpg)
+![1](https://user-images.githubusercontent.com/51421459/97646927-08b30800-1a62-11eb-84eb-535c5cc23c50.jpg)\
 Add income\
-![4](https://user-images.githubusercontent.com/51421459/97646931-094b9e80-1a62-11eb-9f7f-bb241746f66c.jpg)
+![4](https://user-images.githubusercontent.com/51421459/97646931-094b9e80-1a62-11eb-9f7f-bb241746f66c.jpg)\
 Transfer a currency between accounts\
-![3](https://user-images.githubusercontent.com/51421459/97646929-094b9e80-1a62-11eb-9906-18fe285316a7.jpg)
+![3](https://user-images.githubusercontent.com/51421459/97646929-094b9e80-1a62-11eb-9906-18fe285316a7.jpg)\
 Close account\
 ![5](https://user-images.githubusercontent.com/51421459/97646925-081a7180-1a62-11eb-8429-8a352a2d0ea9.jpg)
